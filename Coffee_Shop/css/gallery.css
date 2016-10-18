@@ -1,0 +1,96 @@
+    .dropdown{
+        text-align: center;
+        background-image: url(../images/background.jpg);
+    }
+    .dropdown ul{
+        margin-bottom: 0;
+        margin-top: 0.25em;
+    }
+
+    .dropdown li{
+        display: inline-block;
+        font-family:sans-serif;
+        margin: 0 1em;
+
+        text-transform: uppercase;
+        padding: 0.25em 0.5em;
+    }
+    .dropdown li a{
+        text-decoration: none;
+        color: white;
+        padding: 0.25em;
+        margin: 0;
+    }
+    .dropjobs{
+        display: none;
+        position: absolute;
+         margin-top: 0.25em;
+        background-color: coral;
+    }
+    .dropdown ul li:visited{
+        color:white;
+    }
+
+
+    .dropdown li a:hover{
+        color: saddlebrown;
+        background-color: white;
+    }
+    .jobs:hover .dropjobs {
+        display: block;
+    }
+
+    .dropjobs a{
+        display: block;
+    }
+    .gallery{
+        width: 200px;
+        height: 130px;
+        display: block;
+        float: left;
+        margin: 0.5em;
+        box-shadow: 0 10px 15px 0 saddlebrown;
+        background-color: white;
+    }
+    .imagecontainer img{
+        width: 100%;
+        height: 100px;
+
+    }
+    .imagecontainer{
+        width: 670px;
+        margin-left: 1em;
+        padding-top: 1em;
+    }
+    .gallery p{
+
+        text-align: center;
+        margin:auto;
+        color: saddlebrown;
+        font-family: Papyrus, fantasy;
+    }
+    .bodycontents{
+        top:100px;
+        background-color: antiquewhite;
+        width: 1240px;
+        height:650px;
+        border-left: thick ridge saddlebrown;
+        border-right: thick ridge saddlebrown;
+        
+    }
+    .imagecontainer{
+        background-color: antiquewhite;
+        float: left;
+    }
+    h3{
+        color: saddlebrown;
+        font-family: Papyrus, fantasy;
+        margin: 0.25em 0.5em;
+    }
+    #image{
+        width:530px;
+        height:330px;
+        float:left;
+        margin: auto;
+        margin-top: 120px;
+    }
