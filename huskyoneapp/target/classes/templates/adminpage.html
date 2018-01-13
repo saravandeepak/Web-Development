@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head>
+
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>OneHuskyApp</title>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <!-- Custom CSS -->
+    <link href="css/shop-homepage.css" rel="stylesheet" />
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style>
+        body{
+            padding-top: 51px;
+        }
+        .navbar{
+            background-color: #AE2D21;
+        }
+        .navbar a{
+            color: white;
+        }
+        .navbar-brand{
+            font-weight: 800;
+        }
+        .navbar .nav>li>a:hover{
+            background-color: #AE2D21;
+        }
+        #filters{
+            position: fixed;
+            top: 51px;
+            left: 225px;
+            width: 225px;
+            margin-left: -225px;
+            border: none;
+            border-radius: 0;
+            overflow-y: auto;
+            bottom: 0;
+            overflow-x: hidden;
+            border: 1px solid #ccc;
+        }
+        #filterform input[type="text"]{
+            width: 70px;
+        }
+        #searchdiv{
+            position: fixed;
+            z-index: 3;
+            background-color: white;
+            padding-bottom: 10px;
+            border-bottom: 10px solid #AE2D21;
+        }
+        #filters h3{
+            padding-top: 10px;
+            padding-bottom: 7px;
+            border-bottom: 10px solid #AE2D21;
+        }
+        .activ{
+            font-weight: 800;
+        }
+        .tabbable-panel .nav-tabs{
+            margin-top: 22px;
+    		padding-bottom: 2px;
+            border-bottom: 10px solid #AE2D21;
+        }
+        .tabbable-panel .tab-content{
+            margin-top: 20px;
+        }
+        .tabbable-panel .nav-tabs>li{
+            float: right;
+        }
+        .container-fluid>.thumbnail{
+            background-color: #AE2D21;
+            color: white;
+            padding-top: 10px;
+        }
+        .stat{
+            border: 1px solid #AE2D21;
+            margin-bottom: 10px;
+        }
+        .container-fluid>.thumbnail .badge{
+            background-color: white;
+            color: #AE2D21;
+        }
+    </style>
+</head>
+
+<body>
+
+     <nav class="navbar navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="home.htm">OneHuskyApp<img src="images/husky_logo.png" /></a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li class="activ">
+                        <a href="housing.htm">Housing</a>
+                    </li>
+                    <li>
+                        <a href="forsale.htm">For Sale</a>
+                    </li>
+                    <li>
+                        <a href="jobs.htm">Jobs</a>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="post.htm" ><span class="glyphicon glyphicon-log-in"></span> Post</a>
+                    </li> 
+                    <li sec:authorize="!isAuthenticated()">
+                        <a href="login"><span class="glyphicon glyphicon-log-in"></span> Login/Sign Up</a>
+                        
+                    </li>
+                    <li sec:authorize="isAuthenticated()">
+                    	<a sec:authorize="hasRole('ROLE_USER')" href="user.htm" ><span class="glyphicon glyphicon-user"></span> <span sec:authentication="name" ></span></a>
+                    	<a sec:authorize="hasRole('ROLE_ADMIN')" href="adminpage.htm" ><span class="glyphicon glyphicon-user"></span> Admin Page</a>
+                    </li>
+                    <li sec:authorize="isAuthenticated()">  
+                    	<a href="logout" > <span class="glyphicon glyphicon-log-out"></span>Logout</a>
+                    </li> 
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+    <!-- Page Content -->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12 tabbable-panel">
+                <ul class="nav nav-tabs">
+                    <li><a data-toggle="tab" href="#home" >Reports</a></li>
+                    <li><a data-toggle="tab" href="#menu1" >Housing Pending Approval </a></li>
+                    <li class="active"><a data-toggle="tab" href="#menu2" >Products Pending Approval</a></li>
+                  </ul>
+
+                  <div class="tab-content" ng-controller="AdminController">
+                    <div id="home" class="tab-pane fade text-center">
+                    <h4><button class="btn btn-success" ng-click="getStats()">Refresh <span class="glyphicon glyphicon-refresh"></span></button></h4>
+                      <div class="col-sm-6 col-sm-offset-3 stat">
+                            <h2>General</h2>
+                            <hr />
+                            <div class="col-sm-4">
+                                <div class="container-fluid">
+                                    <div class="thumbnail">
+                                        <p>Users <span class="badge">{{noofusers}}</span></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="container-fluid">
+                                    <div class="thumbnail">
+                                        <p>House Listings <span class="badge">{{noofhouselistings}}</span></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="container-fluid">
+                                    <div class="thumbnail">
+                                        <p>Product Listings <span class="badge">{{noofproductlistings}}</span></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-sm-offset-3 stat">
+                            <h2>Housing</h2>
+                            <hr />
+                            <div class="col-sm-4">
+                                <div class="container-fluid">
+                                    <div class="thumbnail">
+                                        <p>Pending <span class="badge">{{houseapproveno}}</span></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="container-fluid">
+                                    <div class="thumbnail">
+                                        <p>Approved <span class="badge">{{housependingno}}</span></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="container-fluid">
+                                    <div class="thumbnail">
+                                        <p>Rejected <span class="badge">{{houserejectno}}</span></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-sm-offset-3 stat">
+                            <h2>Products</h2>
+                            <hr />
+                            <div class="col-sm-4">
+                                <div class="container-fluid">
+                                    <div class="thumbnail">
+                                        <p>Pending <span class="badge">{{productapproveno}}</span></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="container-fluid">
+                                    <div class="thumbnail">
+                                        <p>Approved <span class="badge">{{productpendingno}}</span></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="container-fluid">
+                                    <div class="thumbnail">
+                                        <p>Rejected <span class="badge">{{productrejectno}}</span></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="menu1" class="tab-pane fade">
+                      <h4 class="text-center"><button class="btn btn-success" ng-click="getHouses()">Refresh <span class="glyphicon glyphicon-refresh"></span></button></h4>	
+                      <div class="col-sm-3" ng-repeat="house in houses" >
+                            <div class="thumbnail">
+                                <div id="myCarousel{{$index}}" class="carousel slide" data-ride="carousel">
+                                    <!-- Wrapper for carousel items -->
+                                    <div class="carousel-inner"  ng-show="!house.imagepath.length">
+	                                	<div class="item active">
+	                                        <img src="http://placeholders.org/320x200" style="height:200px; width: 320px" />
+	                                    </div>
+	                                </div>
+	                                <div class="carousel-inner" ng-show="house.imagepath.length" >
+	                                	<div class="item" ng-class="{active:!$index}" ng-repeat="image in house.imagepath">
+	                                        <img ng-src="{{image.url}}"  style="height:200px; width: 320px" />
+	                                    </div>
+	                                </div>
+                                    <!-- Carousel controls -->
+                                    <a class="carousel-control left" href="#myCarousel{{$index}}" data-slide="prev">
+                                        <span class="glyphicon glyphicon-chevron-left"></span>
+                                    </a>
+                                    <a class="carousel-control right" href="#myCarousel{{$index}}" data-slide="next">
+                                        <span class="glyphicon glyphicon-chevron-right"></span>
+                                    </a>
+                                </div>
+                                <div class="caption">
+	                                <h4 class="pull-right">{{house.rent | currency}}</h4>
+	                                <h4><a href="#">{{house.title}}</a>
+	                                </h4>
+	                                <p>{{house.description}}</p>
+	                                <span><small>{{house.posteddate}}</small></span>
+	                                <button class="btn btn-danger pull-right" ng-click="approveHouse(house.housingListingId)">Approve</button> 
+	                                <button class="btn btn-warning pull-right" ng-click="rejectHouse(house.housingListingId)">Reject</button>
+	                            </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="menu2" class="tab-pane fade in active" >
+                      <h4 class="text-center"><button class="btn btn-success" ng-click="getProducts()">Refresh <span class="glyphicon glyphicon-refresh"></span></button></h4>
+                      <div class="col-sm-3" ng-repeat="product in products">
+                            <div class="thumbnail">
+                                <div id="myCarousel{{$index}}" class="carousel slide" data-ride="carousel">
+                                    <!-- Wrapper for carousel items -->
+                                  
+                                    <div class="carousel-inner"  ng-show="!product.images.length">
+	                                	<div class="item active">
+	                                        <img src="http://placeholders.org/320x200" style="height:200px; width: 320px" />
+	                                    </div>
+	                                </div>
+	                                <div class="carousel-inner" ng-show="product.images.length" >
+	                                	<div class="item" ng-class="{active:!$index}" ng-repeat="image in product.images">
+	                                        <img ng-src="{{image.url}}"  style="height:200px; width: 320px" />
+	                                    </div>
+	                                </div>
+                                    <!-- Carousel controls -->
+                                    <a class="carousel-control left" href="#myCarousel{{$index}}" data-slide="prev">
+                                        <span class="glyphicon glyphicon-chevron-left"></span>
+                                    </a>
+                                    <a class="carousel-control right" href="#myCarousel{{$index}}" data-slide="next">
+                                        <span class="glyphicon glyphicon-chevron-right"></span>
+                                    </a>
+                                </div>
+                                <div class="caption">
+	                                <h4 class="pull-right">{{product.price | currency}}</h4>
+	                                <h4>
+	                                	<a href="#">{{product.title}}</a>
+	                                </h4>
+	                                <p>{{product.description}}</p>
+	                                <span><small>{{product.posteddate}}</small></span>
+	                                <button class="btn btn-danger pull-right" ng-click="approveProduct(product.productListingId)">Approve</button> 
+	                                <button class="btn btn-warning pull-right" ng-click="rejectProduct(product.productListingId)">Reject</button>
+	                            </div>
+                            </div>
+                        </div>
+                    </div>
+                  </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+
+    
+    <script>
+        $('.carousel').carousel({
+            interval: false
+        }); 
+    </script>
+    <script>
+    var app = angular.module("myApp",[]);
+
+    app.controller('AdminController',['$scope', '$http', function($scope, $http){
+    	
+    	$scope.noofusers = 0;
+    	$scope.noofhouselistings = 0;
+    	$scope.noofproductlistings = 0;
+    	$scope.houseapproveno = 0;
+    	$scope.housependingno = 0;
+    	$scope.houserejectno = 0;
+    	$scope.productapproveno = 0;
+    	$scope.productpendingno = 0;
+    	$scope.productrejectno = 0;
+    	
+
+    	$scope.getProducts = function(){
+	        $http({
+	            method: 'GET',
+	            url:'api/v1/getAdminProducts',
+	            
+	        }).success(function(data){
+	
+	            console.log(data);
+	            $scope.products = data;            
+	        });
+    	};
+    	
+    	$scope.getProducts();
+        
+    	$scope.getHouses = function(){
+	        $http({
+	            method: 'GET',
+	            url:'api/v1/getAdminHouses',
+	            
+	        }).success(function(data){
+	
+	            console.log(data);
+	            $scope.houses = data;            
+	        });
+    	};
+    	
+    	$scope.getHouses();
+    	
+    	$scope.approveProduct = function(productId){
+    		$http({
+	            method: 'GET',
+	            url:'api/v1/approveProduct',
+	            params:{
+	            	"productId": productId 
+	            }
+	            
+	        }).success(function(){
+	        	alert("Successfully Approved");
+				$scope.getProducts();
+	           	           
+	        });
+    	};
+    	
+    	$scope.rejectProduct = function(productId){
+    		$http({
+	            method: 'GET',
+	            url:'api/v1/rejectProduct',
+	            params:{
+	            	"productId": productId 
+	            }
+	            
+	        }).success(function(){
+	        	alert("Successfully Approved");
+				$scope.getProducts();
+	           	           
+	        });
+    	};
+    	
+    	$scope.approveHouse = function(houseId){
+    		$http({
+	            method: 'GET',
+	            url:'api/v1/approveHouse',
+	            params:{
+	            	"houseId": houseId 
+	            }
+	            
+	        }).success(function(){
+	        	alert("Successfully Rejected");
+				$scope.getHouses();
+	           	           
+	        });
+    	};
+    	
+    	$scope.rejectHouse = function(houseId){
+    		$http({
+	            method: 'GET',
+	            url:'api/v1/rejectHouse',
+	            params:{
+	            	"houseId": houseId 
+	            }
+	            
+	        }).success(function(){
+	        	alert("Successfully Rejected");
+				$scope.getHouses();
+	           	           
+	        });
+    	};
+    	
+    	$scope.getStats = function(){
+    		$http({
+	            method: 'GET',
+	            url:'api/v1/getStats',
+	            
+	        }).success(function(data){
+	        	console.log(data);
+	        	$scope.noofusers = data[0];
+	        	$scope.noofhouselistings = data[1];
+	        	$scope.noofproductlistings = data[2];
+	        	$scope.housependingno = data[3];
+	        	$scope.houseapproveno = data[4];
+	        	$scope.houserejectno = data[5];
+	        	$scope.productpendingno = data[6];
+	        	$scope.productapproveno = data[7];
+	        	$scope.productrejectno = data[8];
+	           	           
+	        });
+    	};
+    	
+    	$scope.getStats();
+    	
+    	
+    	
+        
+    }]);
+
+    
+    </script>
+    <!-- /.container -->
+
+</body>
+
+</html>

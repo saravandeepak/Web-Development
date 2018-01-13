@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Spring Security Example - ProgrammingFree</title>
+<!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+
+</head>
+<body class="security-app">
+	<div class="lc-block">		
+		<div class="alert alert-danger">
+			<h3>You do not have permission to access this page!</h3>	
+		</div>
+		<form action="login" method="get">
+			<input type="submit" class="btn btn-danger" value="Sign in as different user" /> 
+			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+		</form>		
+	</div>	
+</body>
+</html>

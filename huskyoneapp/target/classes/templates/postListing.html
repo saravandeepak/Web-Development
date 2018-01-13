@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>OneHuskyApp</title>
+      
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <!-- Custom CSS -->
+    <link href="css/shop-homepage.css" rel="stylesheet" />
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style>
+        body{
+            padding-top: 40px;
+        }
+        .navbar{
+            background-color: #AE2D21;
+        }
+        .navbar a{
+            color: white;
+        }
+        .navbar-brand{
+            font-weight: 800;
+        }
+        .navbar .nav>li>a:hover{
+            background-color: #AE2D21;
+        }
+        
+        #accordion .panel-heading{
+            background-color: #AE2D21;
+            color: white;
+        }
+        .lead{
+            margin-bottom: 10px;
+        }
+        .form-group select{
+            margin-top: 31px;
+        }
+    </style>
+</head>
+
+<body>
+
+     <nav class="navbar navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="home.htm">OneHuskyApp<img src="images/husky_logo.png" /></a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="housing.htm">Housing</a>
+                    </li>
+                    <li >
+                        <a href="forsale.htm">For Sale</a>
+                    </li>
+                    <li class="activ">
+                        <a href="jobs.htm">Jobs</a>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li sec:authorize="!isAuthenticated()">
+                        <a href="login"><span class="glyphicon glyphicon-log-in"></span> Login/Sign Up</a> 
+                    </li>
+                    <li sec:authorize="isAuthenticated()">
+                    	<a sec:authorize="hasRole('ROLE_USER')" href="user.htm" ><span class="glyphicon glyphicon-user"></span> <span sec:authentication="name" ></span></a>
+                    	<a sec:authorize="hasRole('ROLE_ADMIN')" href="adminpage.htm" ><span class="glyphicon glyphicon-user"></span> Admin Page</a>
+                    </li>
+                    <li sec:authorize="isAuthenticated()">  
+                    	<a href="logout" > <span class="glyphicon glyphicon-log-out"></span>Logout</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+    <!-- Page Content -->
+    <div class="container">
+      <h2 class="text-center">Post Listings</h2>
+      <p class="lead text-center">Post your own listing for the huskies to see</p>
+      <div class="panel-group" id="accordion">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" data-parent="#accordion" href="#housing">List a housing</a>
+            </h4>
+          </div>
+          <div id="housing" class="panel-collapse collapse">
+            <div class="panel-body">
+                <form th:action="@{/postHousing}" th:object="${housingListing}" method="post" enctype="multipart/form-data">
+                  <div class="form-group">
+                    <label>Title:</label>
+                    <input type="text" class="form-control" th:field="*{title}" required="required" />
+                  </div>
+                  <div class="form-group">
+                    <label>Description:</label>
+                      <textarea class="form-control" th:field="*{description}" rows="6" required="required" ></textarea>
+                  </div>
+                    <div class="form-group"> 
+                        <p><strong>Address:</strong></p>
+                      <div class="col-sm-4 form-group">
+                        <input type="text" class="form-control" th:field="*{address.street}" placeholder="Street" />
+                      </div>
+                        <div class="col-sm-2 form-group">
+                        <input type="text" class="form-control" th:field="*{address.apt}" placeholder="Apt" />
+                      </div>
+                        <div class="col-sm-2 form-group">
+                        <input type="text" class="form-control" th:field="*{address.city}" placeholder="City" />
+                      </div>
+                        <div class="col-sm-2 form-group">
+                        <input type="text" class="form-control" th:field="*{address.state}" placeholder="State" />
+                      </div>
+                        <div class="col-sm-2 form-group">
+                        <input type="number" class="form-control" th:field="*{address.zipcode}" placeholder="Zipcode" min="0" pattern="[0-9]{6}" />
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-5 form-group">
+                          <label>Housing Type:</label> <br />
+                        <input type="radio" name="housingType" value="Long Term" checked="checked" /> Long term &ensp;
+                        <input type="radio" name="housingType" value="Sublet" /> Sublet &ensp;
+                        <input type="radio" name="housingType" value="Room Share" /> Room share &ensp;
+                        <input type="radio" name="housingType" value="BnB" /> Bed and Breakfast &ensp;
+                      </div>
+                      <div class="col-sm-2 form-group">
+                        <label>Start Date:</label>
+                        <input type="date" class="form-control" th:field="*{startdate}" />
+                      </div>
+                      <div class="col-sm-2 form-group">
+                        <label>End Date:</label>
+                        <input type="date" class="form-control" th:field="*{enddate}" />
+                      </div>
+                      <div class="col-sm-offset-1 col-sm-2 form-group">
+                        <label>Rent:</label>
+                        <input type="number" class="form-control" th:field="*{rent}" min="0" value="0" /> 
+                      </div>
+                    </div>
+                    <div>
+                        <label>Select images: </label> <input type="file" name="housingimg" multiple="multiple" id="#uploadHouse" accept="image/x-png,image/gif,image/jpeg,image/jpg" />
+                    </div>
+                    <div>
+                        <br />
+                        <button type="submit" class="btn btn-danger">Post</button>
+                    </div>
+                </form>
+            </div>
+          </div>
+        </div>
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" data-parent="#accordion" href="#forSale">Post items for sale</a>
+            </h4>
+          </div>
+          <div id="forSale" class="panel-collapse collapse">
+            <div class="panel-body">
+                <form th:action="@{/postProduct}" method="post" enctype="multipart/form-data">
+                  <div class="form-group">
+                    <label>Title:</label>
+                    <input type="text" class="form-control" name="title" required="required" />
+                  </div>
+                  <div class="form-group">
+                    <label>Description:</label>
+                      <textarea class="form-control" name="description" rows="6" required="required" ></textarea>
+                  </div>
+                    <div id="allFields" class="row">
+                      <div id="prodtype" class="col-sm-5 form-group">
+                          <label>Product Type:</label> <br />
+                        <input type="radio" name="productType" value="book" checked="checked" /> Book &ensp;
+                        <input type="radio" name="productType" value="computer" /> Computer &ensp;
+                        <input type="radio" name="productType" value="electronic" /> Electronic &ensp;
+                        <input type="radio" name="productType" value="furniture" /> Furniture &ensp;
+                      </div>
+                      <div id="bookFields" class="col-sm-7 fields">
+                          <div class="col-sm-4 form-group">
+                            <label>Book Name:</label>
+                            <input type="text" class="form-control" name="bookname" />
+                          </div>
+                          <div class="col-sm-4 form-group">
+                            <label>Genre:</label>
+                            <input type="text" class="form-control" name="genre" />
+                          </div>
+                          <div class="col-sm-4 form-group">
+                            <label>Author:</label>
+                            <input type="text" class="form-control" name="author" />
+                          </div>
+                      </div>
+                        <div id="computerFields" class="col-sm-7 fields" style="display:none">
+                          <div class="col-sm-4 form-group">
+                            <label>Computer Type:</label>
+                            <input type="text" class="form-control" name="computerType" />
+                          </div>
+                          <div class="col-sm-4 form-group">
+                            <label>Computer Brand:</label>
+                            <input type="text" class="form-control" name="computerBrand" />
+                          </div>
+                      </div>
+                        <div id="electronicsFields" class="col-sm-7 fields" style="display:none">
+                          <div class="col-sm-4 form-group">
+                            <label>Electronic Type:</label>
+                            <input type="text" class="form-control" name="electronicType" />
+                          </div>
+                          <div class="col-sm-4 form-group">
+                            <label>Genre:</label>
+                            <input type="text" class="form-control" name="electronicMake" />
+                          </div>
+                      </div>
+                        <div id="furnitureFields" class="col-sm-7 fields" style="display:none">
+                          <div class="col-sm-4 form-group">
+                            <label>Furniture Type:</label>
+                            <input type="text" class="form-control" name="furnitureType" />
+                          </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-5 form-group">
+                          <label>Condition:</label> <br />
+                        <input type="radio" name="condition" value="New" checked="checked" /> New &ensp;
+                        <input type="radio" name="condition" value="Unpacked" /> Unpacked &ensp;
+                        <input type="radio" name="condition" value="Excellent" /> Excellent &ensp;
+                        <input type="radio" name="condition" value="Fair" /> Fair &ensp;
+                        <input type="radio" name="condition" value="Old" /> Old &ensp;  
+                      </div>
+                      <div class="col-sm-2 form-group">
+                        <label>Price:</label>
+                        <input type="number" class="form-control" name="price" min="0" value="0" />
+                      </div>
+                      
+                      <div class="col-sm-offset-1 col-sm-4 form-group">
+                          <label>Select images: </label> <input  type="file" name="productimg" multiple="multiple" accept="image/x-png,image/gif,image/jpeg,image/jpg" />
+                      </div>
+                    </div>
+                    <div class="form-group"> 
+                        <p><strong>Address:</strong></p>
+                      <div class="col-sm-4 form-group">
+                        <input type="text" class="form-control" name="street" placeholder="Street" />
+                      </div>
+                        <div class="col-sm-2 form-group">
+                        <input type="text" class="form-control" name="apt" placeholder="Apt" />
+                      </div>
+                        <div class="col-sm-2 form-group">
+                        <input type="text" class="form-control" name="city" placeholder="City" />
+                      </div>
+                        <div class="col-sm-2 form-group">
+                        <input type="text" class="form-control" name="state" placeholder="State" />
+                      </div>
+                        <div class="col-sm-2 form-group">
+                        <input type="number" class="form-control" name="zipcode" placeholder="Zipcode" value="0" pattern="[0-9]{6}" />
+                      </div>
+                    </div>
+                    <div>
+                        <br />
+                        <button type="submit" class="btn btn-danger">Post</button>
+                    </div>
+                </form>   
+            </div>
+          </div>
+        </div>
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" data-parent="#accordion" href="#jobs">Post a Job</a>
+            </h4>
+          </div>
+          <div id="jobs" class="panel-collapse collapse">
+            <div class="panel-body">
+                <form th:action="@{/jobPost}" th:object="${jobListing}" method="post">
+                  <div class="form-group">
+                    <label>Job Title:</label>
+                    <input type="text" class="form-control" th:field="*{jobtitle}" />
+                  </div>
+                  <div class="form-group">
+                    <label>Job Description:</label>
+                      <textarea class="form-control" th:field="*{description}" rows="5" ></textarea>
+                  </div>
+                   <div class="form-group">
+                    <label>Job Requirements:</label>
+                      <textarea class="form-control" th:field="*{qualifications}" rows="5" ></textarea>
+                  </div>
+                    <div class="row">
+                      <div class="col-sm-3 form-group">
+                        <label>Location:</label>
+                        <input type="text" class="form-control" th:field="*{location}" placeholder="City, State" />
+                      </div>
+                      <div class="col-sm-offset-2 col-sm-4 form-group">
+                        <label>Job Link:</label>
+                        <input type="url" class="form-control" th:field="*{applylink}" placeholder="http://employer.com/jobid" />
+                      </div>
+                      
+                    </div>
+                    <div>
+                        <br />
+                        <button type="submit" class="btn btn-danger">Post</button>
+                    </div>
+                </form>     
+            </div>
+          </div>
+        </div>
+      </div> 
+    </div>
+	<script>
+        $("#prodtype input").on("click", function(){
+            if($("#prodtype input:checked").val() == "book"){
+                $(".fields").css("display", "none");
+                $("#bookFields").css("display", "block");
+                $("#allFields input[type='text']").val("");
+            }
+            else if($("#prodtype input:checked").val() == "computer"){
+                $(".fields").css("display", "none");
+                $("#computerFields").css("display", "block");
+                $("#allFields input[type='text']").val("");
+            }
+            else if($("#prodtype input:checked").val() == "electronic"){
+                $(".fields").css("display", "none");
+                $("#electronicsFields").css("display", "block");
+                $("#allFields input[type='text']").val("");
+            }
+            else if($("#prodtype input:checked").val() == "furniture"){
+                $(".fields").css("display", "none");
+                $("#furnitureFields").css("display", "block");
+                $("#allFields input[type='text']").val("");
+            }
+        });
+    </script>
+  </body>
+    
+</html>
