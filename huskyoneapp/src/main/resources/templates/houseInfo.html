@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+<head>
+
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>OneHuskyApp</title>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <!-- Custom CSS -->
+    <link href="css/shop-homepage.css" rel="stylesheet" />
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style>
+        body{
+            padding-top: 51px;
+        }
+        .navbar{
+            background-color: #AE2D21;
+        }
+        .navbar a{
+            color: white;
+        }
+        .navbar-brand{
+            font-weight: 800;
+        }
+        .navbar .nav>li>a:hover{
+            background-color: #AE2D21;
+        }
+        #filters{
+            position: fixed;
+            top: 51px;
+            left: 225px;
+            width: 225px;
+            margin-left: -225px;
+            border: none;
+            border-radius: 0;
+            overflow-y: auto;
+            bottom: 0;
+            overflow-x: hidden;
+            border: 1px solid #ccc;
+        }
+        #filterform input[type="text"]{
+            width: 70px;
+        }
+        #searchdiv{
+            position: fixed;
+            z-index: 3;
+            background-color: white;
+            padding-bottom: 10px;
+            border-bottom: 10px solid #AE2D21;
+        }
+        #filters h3{
+            padding-top: 10px;
+            padding-bottom: 7px;
+            border-bottom: 10px solid #AE2D21;
+        }
+        .activ{
+            font-weight: 800;
+        }
+        #imggallery img{
+        	width:400px;
+        	height:400px;
+        }
+        
+
+    </style>
+</head>
+
+<body>
+
+     <nav class="navbar navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="home.html">OneHuskyApp</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li class="activ">
+                        <a href="housing.htm">Housing</a>
+                    </li>
+                    <li>
+                        <a href="forsale.htm">For Sale</a>
+                    </li>
+                    <li>
+                        <a href="jobs.htm">Jobs</a>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                   <li>
+                        <a href="post.htm" ><span class="glyphicon glyphicon-log-in"></span> Post</a>
+                    </li> 
+                    <li sec:authorize="!isAuthenticated()">
+                        <a href="login"><span class="glyphicon glyphicon-log-in"></span> Login/Sign Up</a>
+                        
+                    </li>
+                    <li sec:authorize="isAuthenticated()">
+                    	<a sec:authorize="hasRole('ROLE_USER')" href="user.htm" ><span class="glyphicon glyphicon-user"></span> <span sec:authentication="name" ></span></a>
+                    	<a sec:authorize="hasRole('ROLE_ADMIN')" href="adminpage.htm" ><span class="glyphicon glyphicon-user"></span> Admin Page</a>
+                    </li>
+                    <li sec:authorize="isAuthenticated()">  
+                    	<a href="logout" > <span class="glyphicon glyphicon-log-out"></span>Logout</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+    <div class="container-fluid">
+        <h1 class="text-center" th:text="${house.title}"> Listing Title</h1>
+        <hr />
+        <div class="col-sm-7">
+            <div>
+                <h3>Description:</h3>
+                <pre th:text="${house.description}">absdhjjas
+                asjdbkjasd
+                ajklsdhkas
+                ajklsdhkjas</pre>
+            </div>
+            <div><h4>Rent:<small th:text="${house.rent}"></small></h4></div>
+            <div ><h4>Address: </h4>
+            	<p th:text="${house.address.street}"></p>
+            	<p th:text="${house.address.city}"></p>
+            	<p th:text="${house.address.state}"></p>
+            	<p th:text="${house.address.zipcode}"></p>
+            </div>
+            <div></div>
+            <div><a class="btn btn-danger" th:href="'mailto:' + ${house.postedby.email}" target="_top">Contact poster</a></div>
+        </div>
+        <div class="col-sm-5">
+            <div id="imggallery" class="container">
+            	<div class="col-sm-6" th:each="image : ${house.imagepath}">
+                	<img class="img-responsive" th:src="${image.url}" alt="" /> 
+                </div> 
+            </div>
+        </div>
+        
+        
+    </div>
+</body>
+</html>
