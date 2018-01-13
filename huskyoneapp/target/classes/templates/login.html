@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+    <head>
+        <title>HuskyOneApp Login </title>
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+
+        <!-- jQuery library -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+
+        <!-- Latest compiled JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <style>
+        
+            body { 
+              background: url(images/login-bg.jpg); 
+              -webkit-background-size: cover;
+              -moz-background-size: cover;
+              -o-background-size: cover;
+              background-size: cover;
+              margin-top: 40px;
+            }
+
+            .panel-default {
+                opacity: 0.95;
+                margin-top:30px;
+                
+            }
+            .panel-default .panel-heading, .panel-default .panel-footer{
+                background-color: #AE2D21;
+                color: white;
+            }
+            .container .row{
+                margin-top: 200px;
+            }
+            input[type="text"] {
+              height: 34px;
+              width: 100%;
+              border-radius: 3px;
+              border: 1px solid transparent;
+              border-top: none;
+              border-bottom: 1px solid #DDD;
+              box-shadow: inset 0 1px 2px rgba(0,0,0,.39), 0 -1px 1px #FFF, 0 1px 0 #FFF;
+            }
+            .navbar{
+                background-color: #AE2D21;
+                
+                font-weight: 800;
+            }
+            .navbar a.navbar-brand{
+                color: white;
+            }
+            .form-group.last { margin-bottom:0px; }
+            .showDiv{
+            	display: block;
+            }
+            
+        </style>
+    </head>
+    <body>
+        <nav class="navbar navbar-fixed-top" role="navigation">
+            <div class="container">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="home.html">OneHuskyApp<img src="images/husky_logo.png" /></a>
+                </div>
+            </div>
+        </nav>
+        <div id="div-forms">
+            <div class="container" id="login-form" >          
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <span class="glyphicon glyphicon-lock"></span> Login</div>
+                            <div class="panel-body">
+                                <form class="form-horizontal" th:action="@{/login}" method="post">
+                                <div class="form-group">
+                                    <label for="inputName" class="col-sm-3 control-label">
+                                        Name</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="inputName" placeholder="Username" name="username" required="required" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputPassword" class="col-sm-3 control-label">
+                                        Password</label>
+                                    <div class="col-sm-9">
+                                        <input type="password" class="form-control" id="inputPassword" placeholder="Password" name="password" required="required" />
+                                    </div>
+                                </div>
+                                <div th:if="${param.error}" class="alert alert-danger alert-dismissable fade in">
+                                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                    <strong>Error!</strong> Invalid username and password.
+                                </div>
+                                <div th:if="${param.logout}" class="alert alert-success alert-dismissable fade in">
+                                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                    <strong>Success!</strong> You have been logged out
+                                </div>
+                                <div th:if="${session.isSuccess}" class="alert alert-success alert-dismissable fade in">
+                                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                    <strong>Success!</strong> You have been registered.
+                                </div>     
+                                <div class="form-group">
+                                    <div class="col-sm-offset-3 col-sm-9">
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox"/>
+                                                Remember me
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group last">
+                                    <div class="col-sm-offset-3 col-sm-9">
+                                        <button type="submit" class="btn btn-danger">
+                                            Sign in</button>
+                                    </div>
+                                </div>
+                                </form>
+                            </div>
+                            <div class="panel-footer">
+                                Not Yet Registred? <button id="login_register_btn" type="button" class="btn btn-link">Register</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>    
+            </div>
+            <div class="container" id="register-form" style="display:none" >          
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <span class="glyphicon glyphicon-lock"></span> Register</div>
+                            <div class="panel-body">
+                                <form class="form-horizontal" th:action="@{/register}" th:object="${userAccount}" method="post">
+                                <div class="form-group">
+                                    <label for="userName" class="col-sm-3 control-label">
+                                        Username</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" th:field="*{userName}" placeholder="Username" required="required" />
+                                        
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="password" class="col-sm-3 control-label">
+                                        Password</label>
+                                    <div class="col-sm-9">
+                                        <input type="password" class="form-control" th:field="*{password}" placeholder="Password"  required="required" />
+                                        
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="name" class="col-sm-3 control-label">
+                                        Name</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" th:field="*{name}" placeholder="Your Name" required="required" />
+                                        
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="email" class="col-sm-3 control-label">
+                                        Email</label>
+                                    <div class="col-sm-9">
+                                        <input type="email" class="form-control" th:field="*{email}" placeholder="someone@example.com" required="required" />
+                                        
+                                    </div>
+                                </div>
+                           
+                                <div th:if="${session.regiserError}" class="alert alert-danger alert-dismissable fade in">
+                                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                    <strong>Sorry!</strong> Username is already taken
+                                </div>
+                                 
+                                <div class="form-group last">
+                                    <div class="col-sm-offset-3 col-sm-9">
+                                        <button id="#register_login_btn" class="btn btn-danger">
+                                            Register</button>
+                                    </div>
+                                </div>
+                                </form>
+                            </div>
+                            <div class="panel-footer">
+                                <button id="register_login_btn" type="button" class="btn btn-link">Back to login</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>    
+            </div>
+        </div>
+        
+        <script>
+            var $modalAnimateTime = 200;
+            var $formLogin = $('#login-form');
+            var $formRegister = $('#register-form');
+            var $divForms = $('#div-forms');
+            $('#login_register_btn').click( function () { modalAnimate($formLogin, $formRegister) });
+            $('#register_login_btn').click( function () { modalAnimate($formRegister, $formLogin); });
+            function modalAnimate ($oldForm, $newForm) {
+                var $oldH = $oldForm.height();
+                var $newH = $newForm.height();
+                $divForms.css("height",$oldH);
+                $oldForm.fadeToggle($modalAnimateTime, function(){
+                    $divForms.animate({height: $newH}, $modalAnimateTime, function(){
+                        $newForm.fadeToggle($modalAnimateTime);
+                    });
+                });
+            }
+        </script>
+        <script th:inline="javascript">
+		
+		    if([[${session.isRegister}]] != null){
+		    	modalAnimate($formLogin, $formRegister);
+		    }
+		
+		</script>
+        
+    </body>
+</html>
