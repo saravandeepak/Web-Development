@@ -1,0 +1,71 @@
+
+.headercm{
+    background-color: antiquewhite;
+    z-index: 3;
+    position: fixed;
+    width: 1250px;
+    padding-top: 1em;
+    top: 0;
+    padding-bottom: 0;
+
+}
+header{
+    width: 100%;
+    display: block;
+    text-align: center;
+}
+.logo1{
+    float: left;
+    width: 20;  
+    clear:left;
+    margin-left: 10em;
+        
+}
+.logo2{
+    float:right;
+    width: 20;
+    clear:right;
+    margin-right: 10em;
+}
+header h1{
+    
+    color: #854442;
+    margin: 0;
+    font-family: Cabin sketch;
+    
+    
+    padding-top: 0.2em;
+    padding-bottom: 0;
+
+} 
+header em{
+    color: #854442;
+    font-size: 1.1em;
+    margin-bottom: 0.20em;
+    font-weight: 300;
+    font-family: Papyrus, fantasy;
+    
+}
+
+.bodycontents{
+            
+    
+    top:135px;
+    position: relative;
+    display: block;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    left: 0;
+    right: 0;
+    background-color: antiquewhite;
+}
+.wrapper{
+    width: 1250px;
+    margin: auto;
+    background-color: antiquewhite;
+
+}
+#currentpage{
+                color: darkgray;
+            }

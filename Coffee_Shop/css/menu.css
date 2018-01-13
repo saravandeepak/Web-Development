@@ -1,0 +1,128 @@
+    
+        
+        .bodycontents{
+            
+            height: 1300px;
+            top: 100px;
+        }
+        .menucontents{
+            background-image: url(../images/menu_img.jpg);
+            background-repeat: repeat-y;
+            background-size:contain;
+            margin-bottom: 2em;
+            padding-bottom: 2em;
+            border-left: ridge;
+            border-color: saddlebrown;
+            border-width: thick;
+            
+        }
+        table{
+            margin-left: 4em;
+            margin-right: 30%;
+            padding-left: 4em;
+            padding-bottom: 2em;
+            
+        }
+        h2{
+            text-align: center;
+            font-family: Papyrus, fantasy;
+            color: brown;
+            font-size: 30px;
+            margin-top: 0;
+            padding-top: 1em;
+            
+        }
+        caption{           
+            text-align: center;
+            font-family: Papyrus, fantasy;
+            color: brown;
+            text-decoration: underline;
+        }
+        tr{
+            color: saddlebrown;
+            font-family: Papyrus, fantasy;
+        }
+        
+        tbody tr:hover{
+            background-image: url(../images/background.jpg);
+            color: white;
+        }
+        th{
+            padding: 0.25em 1em; 
+        }
+        td{
+            padding: 0.25em 1em;
+        }
+        .column1{
+            width:300px;
+        }
+        .column2{
+            width:100px;
+            text-align: left;
+            color: saddlebrown;
+        }
+        .column3{
+            width:100px;
+            text-align: left;
+            color: saddlebrown;
+        }
+        tr:nth-child(2n){
+            background-color: antiquewhite;
+            background-size: cover;
+        }
+        thead tr{
+            color: saddlebrown;
+            background-color: white;
+        }
+        .dropdown{
+            text-align: center;
+
+            background-image: url(../images/background.jpg);
+        }
+       .dropdown ul{
+           margin-bottom: 0;
+           margin-top: 0.25em;
+       }
+
+        .dropdown li{
+            display: inline-block;
+            font-family:sans-serif;
+            margin: 0 1em;
+
+            text-transform: uppercase;
+            padding: 0.25em 0.5em;
+        }
+        .dropdown li a{
+            text-decoration: none;
+            color: white;
+            padding: 0.25em;
+            margin: 0;
+        }
+        .dropjobs{
+            display: none;
+            position: absolute;
+             margin-top: 0.25em;
+            background-color: coral;
+        }
+        .dropdown ul li:visited{
+            color:white;
+        }
+
+
+        .dropdown li a:hover{
+            color: saddlebrown;
+            background-color: white;
+        }
+        .jobs:hover .dropjobs {
+            display: block;
+        }
+
+        #drop1{
+            display: block;
+
+        }
+        #drop2{
+            display: block;
+
+        }
+

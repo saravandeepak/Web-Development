@@ -1,0 +1,128 @@
+   
+    body{
+        
+        background-size: cover;
+        color: saddlebrown;
+        font-family: sans-serif;
+
+    }
+    .bodycontents{
+        top:100px;
+        
+    }
+    .formwrapper{
+        width:700px;
+        margin: 10px auto;
+        padding: 1em 2em;
+        background-image: url(../images/paperbackground.png);
+        background-size: cover;
+        padding-bottom: 5em;
+
+    }
+    .formwrapper h2{
+        margin-top: 2em;
+        text-align: center;
+    }
+    label, input{
+        display: inline-block;
+    }
+    label{
+
+        width: 25%;
+        text-align: right;
+        margin-right: 0.5em;
+
+    }
+    .formwrapper input {
+        margin-bottom: 1em;
+    }
+    #submit{
+        text-align: center;
+        margin: 2em;
+
+    }
+    .address , .midlastname {
+        width: 200px;
+        margin-left: 183px;
+    }
+    .name, .email, .phoneno{
+        width: 200px;
+    }
+
+    textarea{
+        display: inline-block;
+        vertical-align: top;
+        margin-bottom: 1em;
+
+    }
+    span{
+        font-size: 80%;
+    }
+    .address1{
+        width: 200px;
+    }
+    input[name=submit]{
+        padding: 1em;
+    }
+    .homefooter{
+        background-color: antiquewhite;
+    }
+
+    .errormessage{
+        font-size: 70%;
+        color: red;
+    }
+    #introError{
+        display: none;
+        margin-left: 185px;
+    }
+    .dropdown{
+        text-align: center;
+
+        background-image: url(../images/background.jpg);
+    }
+    .dropdown ul{
+        margin-bottom: 0;
+        margin-top: 0.25em;
+    }
+
+    .dropdown li{
+        display: inline-block;
+        font-family:sans-serif;
+        margin: 0 1em;
+
+        text-transform: uppercase;
+        padding: 0.25em 0.5em;
+    }
+    .dropdown li a{
+        text-decoration: none;
+        color: white;
+        padding: 0.25em;
+        margin: 0;
+    }
+    .dropjobs{
+        display: none;
+        position: absolute;
+         margin-top: 0.25em;
+        background-color: coral;
+    }
+    .dropdown ul li:visited{
+        color:white;
+    }
+
+
+    .dropdown li a:hover{
+        color: saddlebrown;
+        background-color: white;
+    }
+    .jobs:hover .dropjobs {
+        display: block;
+    }
+
+    .dropjobs a{
+        display: block;
+    }
+    .bodycontents{
+                background-image: url(images/background.jpg);
+                background-size: cover;
+            }

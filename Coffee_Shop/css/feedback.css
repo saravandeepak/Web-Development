@@ -1,0 +1,101 @@
+   
+    
+    label, input{
+        display: inline-block;
+    }
+    input {
+        margin-bottom: 1em;
+    }
+    label{
+
+        width: 20%;
+        text-align: right;
+        margin-right: 0.5em;
+
+    }
+    .bodycontents{
+        height: 100%;
+        width: 1240px;
+        top:100px;
+        border-left: thick ridge saddlebrown;
+        border-right: thick ridge saddlebrown;
+    }
+    #feedback{
+        width:450px;
+        background-image: url(../images/background.jpg);
+
+        margin: 10px 10%;
+        padding: 1em 2em;
+        border: dotted;
+        color: white;
+        float: left;
+    }
+    #feedimg{
+        display: inline-block;
+    }
+    #feedcontent{
+        padding-bottom: 190px;
+        padding-top: 70px;
+    }
+    input[type=submit]{
+        margin-left: 40%;
+    }
+    .error {
+        border:2px solid red;
+    }
+    .errormessage{
+        font-size: 70%;
+        color: red;
+    }
+     .dropdown{
+        text-align: center;
+
+        background-image: url(../images/background.jpg);
+    }
+    .dropdown ul{
+        margin-bottom: 0;
+        margin-top: 0.25em;
+    }
+
+    .dropdown li{
+        display: inline-block;
+        font-family:sans-serif;
+        margin: 0 1em;
+
+        text-transform: uppercase;
+        padding: 0.25em 0.5em;
+    }
+    .dropdown li a{
+        text-decoration: none;
+        color: white;
+        padding: 0.25em;
+        margin: 0;
+    }
+    .dropjobs{
+        display: none;
+        position: absolute;
+         margin-top: 0.25em;
+        background-color: coral;
+    }
+    .dropdown ul li:visited{
+        color:white;
+    }
+
+    .dropdown li a:hover{
+        color: saddlebrown;
+        background-color: white;
+    }
+    .jobs:hover .dropjobs {
+        display: block;
+    }
+
+    #drop1{
+        display: block;
+
+    }
+    #drop2{
+        display: block;
+
+    }
+
+    

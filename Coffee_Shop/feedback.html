@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>C&M Feedback</title>
+        <link rel="stylesheet" type="text/css" href="css/header.css"/>
+        <link rel="stylesheet" type="text/css" href="css/footer.css"/>
+        <link rel="stylesheet" type="text/css" href="css/feedback.css"/>
+        <script type = "text/javascript" src="javascript/feedback.js"></script>
+
+    </head>
+    <body>
+        <div class="wrapper">
+        <div class="headercm">
+            <header>
+                <img class="logo2" src="images/logo.png" alt="logo" height="70" />
+                <a href="Index.html"><img class="logo1" src="images/homeicon.png" alt = "logo" height="70"/></a>
+                <h1>Coffee&More</h1>
+                <em>It's not just Coffee! It's much more!</em>
+            </header>
+            <div class= "dropdown">
+            <ul >
+                
+                <li><a href="Aboutus.html"> About Us</a></li>
+                <li><a href="Menu.html"> Menu</a></li>
+                <li><a href="gallery.html">Gallery</a> </li>
+                <li class="jobs"><a href="#" > Jobs</a>
+                <div class= "dropjobs">
+                    <a id="drop1" href="Jobs.html"> Job Details</a> 
+                    <a id="drop2" href="applyjob.html"> Apply Jobs</a>
+                </div></li>
+                <li><a id = "currentpage" href="feedback.html">Feedback</a></li>               
+                
+            </ul>
+            </div>
+         </div>
+         <div class="bodycontents">
+             <div id="feedcontent">
+             <div id="feedback">
+                <h2>Feedback</h2>
+                 <div>
+                    <form onsubmit="return validateFields()">
+                        
+                        <label>Name:</label><input type="text" name="name" id="name" placeholder="Name" onblur="validateName()" /> <span id="nameError" class="errormessage"></span><br />
+                        <label>Email:</label><input type="text" id="email" name="email" placeholder="someone@example.com" onblur="validateEmail()" /><span id="emailError" class="errormessage"></span><br />
+                        <label>Rating:</label> <input type="radio" name="rating" id="rating1" value="1" /><span>1</span>
+                        <input type="radio" name="rating" id="rating2" value="2" /><span>2</span>
+                        <input type="radio" name="rating" id="rating3" value="3" /><span>3</span>
+                        <input type="radio" name="rating" id="rating4" value="4" /><span>4</span>
+                        <input type="radio" name="rating" id="rating5" value="5" /><span>5</span> <span id="ratingError" class="errormessage"></span><br/>
+
+                        <label>Comments:</label><br /><textarea name="comments" id="comments" rows="8" cols="60" ></textarea><br />
+                        <input type="submit" name="submit" value="Submit" >
+                     </form>
+                 </div>
+                 
+                
+             </div>
+             <div id ="feedimg">
+                 <img id="feed" src="images/feedback.png" alt="Feedback" height="350" width="350"  />
+                    
+                 </div>
+            </div>       
+        </div>
+        
+        <div class="homefooter">
+            <footer>
+                <div class="footercontent">
+                    <p id = "p1">Coypright of C&M&copy; 2016. All Rights Reserved. <a class="footerlink" href="TermsAndConditions.html" target= "_blank">Terms and Conditions </a></p>
+                    <p id ="p2">
+                        Any queries regarding the website mail to <a class="footeremail" href="mailto:saravan.deepak@gmail.com">saravan.deepak@gmail.com</a>
+                    </p>
+                </div>   
+            </footer>
+        </div>
+        
+        </div>
+     </body>
+</html>

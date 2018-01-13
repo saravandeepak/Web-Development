@@ -1,0 +1,243 @@
+
+        body{
+            
+            color: white;
+            font-family: sans-serif;
+
+        }
+        .headercm{
+            border-bottom:ridge;
+            border-width:thick;
+            border-color:saddlebrown;
+            padding-bottom: 0.25em;
+        }
+        .content1{
+            background-image: url(../images/background.jpg);
+            background-size: cover;
+            overflow: auto;
+            margin: 0.1em 0 ;
+            left: 0;
+            right: 0;
+            color: antiquewhite;
+        }
+        .content1 ul{
+            overflow: hidden;
+            margin-bottom: 2em;
+        }
+        .content1 h2{
+            text-align: center;
+            margin: 1em;
+            font-family: cursive;
+            
+            
+        }
+        h2 > span{
+            font-size: 36px;
+        }
+       
+        .content2{
+            background-image: url(../images/background.jpg);
+            background-size: cover;
+            overflow: auto;
+            margin: 0.1em 0;
+            left: 0;
+            right: 0;
+        }
+        
+        .content2 em{
+            display: block;
+            width:40%;
+            text-align: center;
+            margin-top: 2em;
+            margin-bottom: 2em;
+            margin-right: 5em;
+            margin-left: 10em;
+            font-size: 24px;
+            color: lightgoldenrodyellow;
+            
+        }
+        b{
+            color: red;
+            font-family: cursive;
+            font-size: 1.2em;
+        }
+        
+        .content1 li{
+            list-style-image: url(../images/coffee_cup_icon.png);
+            margin-left: 0;
+    
+        }
+        .coffeecup1{
+            float:left;
+            clear:left;
+            margin-left: 0.5em;
+            margin-top: 4.5em;
+        }
+        .coffeecup2{
+            float: right;
+            clear: right;
+            margin-right: 10em;
+        }
+        .menucontent{
+            background-color: white;
+            color:brown;
+            text-decoration: none;
+            text-transform: uppercase;
+            border-bottom-left-radius: 4px;
+            border-bottom-right-radius: 4px;
+            border-top-left-radius: 4px;
+            border-bottom-right-radius: 4px;
+            padding: 5px 10px;
+        
+        }
+        .menucontent:hover{
+            background-color: gainsboro;
+        }
+        p ~ ul{
+            padding-left: 1em;
+        }
+        .content3{
+            overflow: hidden;
+        }
+        .subcontent1 {
+            background-image: url(../images/background.jpg);
+            background-size: cover;
+            overflow: auto;
+            margin-top: 0.1em;
+            left: 0;
+            right: 0;
+            width:38%;
+            position: absolute;
+            float:left;
+            clear: left;
+            border-radius: 10%;
+            
+        }
+        .subcontent1 img{
+            margin: 1em 2em;
+        }
+        .subcontent2{
+            
+            margin-left: 41%;
+            margin-right: 35%;
+            
+        }
+        .subcontent3 {
+            border-radius: 50%;
+            background-image: url(../images/background.jpg);
+            background-size: cover;
+            float: right;
+            clear: right;
+            width: 39%;
+            margin: 0.1em;
+            
+        }
+        .subcontent3 p{
+            text-align: center;
+            font-size: 28px;
+            display: block;
+            margin: 2.8em 1em;
+        }
+        .content4 {
+            background-image: url(../images/background.jpg);
+            background-size: cover;
+            width: 100%;
+            text-align: center;
+            border-radius: 20%;
+            margin-bottom: 3em;
+        }
+        .content4 p{
+            margin: 0;
+            padding: 0.5em;
+            font-family: Papyrus, fantasy;
+            font-size: 28px;
+            color: lightgoldenrodyellow;
+            
+        }
+
+         .bodycontents{
+            
+        
+            top:87px;
+            position: relative;
+            display: block;
+            float: right;
+            width: 87%;
+            padding: 0;
+            padding-left: 0.2em;
+            margin: 0;
+            left: 0;
+            right: 0;
+            bottom: 50px;
+            border-right: solid;
+            border-width: thick;
+            border-color: saddlebrown;
+            background-color: antiquewhite;
+            }
+         .links{
+                text-align: center;
+                top: 90px;
+                background-image: url(../images/background.jpg);
+                float: left;
+                height: 600px;
+                position: fixed;
+                padding: 1em;
+                width: 9%;
+                border: ridge;
+                border-color: saddlebrown;
+                border-width: thick;
+                z-index: 2;
+                border-right: solid;
+                border-right-color: antiquewhite;
+            }
+            .links ul{
+               padding: 1em;
+            }
+            
+            .links li{
+                display: block;
+                font-family:sans-serif;
+               
+                padding-top: 0.5em;
+                padding-bottom: 0.5em;
+                text-transform: uppercase;
+                
+            }
+            .links li a{
+                text-decoration: none;
+                color: white;
+                
+                margin: 0;
+            }
+            .dropjobs{
+                display: none;
+                font-size: 80%;
+                 margin-top: 0.25em;
+                
+            }
+            .links ul li:visited{
+                color:white;
+            }
+            
+            
+            .links li a:hover{
+                color: saddlebrown;
+                background-color: white;
+            }
+            .jobs{
+                padding: 0;
+            }
+            .jobs:hover .dropjobs {
+                display: block;
+            }
+            
+            #drop1{
+                display: block;
+                
+            }
+            #drop2{
+                display: block;
+                
+            }
+            
+
